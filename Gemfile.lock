@@ -175,6 +175,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt (~> 3.1.7)
   byebug
+  elasticsearch
   jquery-rails
   listen (~> 3.0.5)
   pg (~> 0.18)
