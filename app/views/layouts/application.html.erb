@@ -9,6 +9,11 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="header"> 
+    </header>
+    <%= image_tag("banner2.png", class: "billboard fluid")%>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

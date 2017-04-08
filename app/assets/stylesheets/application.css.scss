@@ -13,3 +13,21 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.header {
+
+}
+img.billboard {
+  height: 40%;
+  width: 100%;
+}
+.form-control {
+  width: 80%;
+  margin-left: 10%;
+}
+.search-submit {
+  margin-top: 10px;
+
+}

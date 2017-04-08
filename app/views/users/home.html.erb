@@ -1,0 +1,10 @@
+<div>
+  <h2 class="text-center">Go Search!</h2>
+  <br>
+  <div class="search text-center">
+    <%= form_tag("/search", method: "get") do %>
+      <%= text_field_tag(:q, "", class: "form-control")  %> <br>
+      <%= submit_tag("Search", class: ["btn btn-default search-submit"])%>
+    <% end %>
+  </div>
+</div>
