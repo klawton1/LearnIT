@@ -1,0 +1,13 @@
+<% @courses.each do |course| %>
+  <%= link_to (course_path(course)) do %>
+    <div class="course col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="col-xs-10 col-sm-4 col-md-4 col-lg-4">
+        <%= image_tag(course.image, class: "img-responsive course-img")%>
+      </div>
+      <div class="col-xs-10 col-sm-8 col-md-8 col-lg-8">
+        <h3 class="text-center"><%= course.title%></h3>
+        <p><%= course.short_desc%> </p>
+      </div>
+    </div>
+  <% end %>
+<% end %>

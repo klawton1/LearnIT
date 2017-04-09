@@ -19,10 +19,12 @@
 .header {
 
 }
-img.billboard {
-  height: 40%;
+
+.course-img {
+  max-height: 200px;
   width: 100%;
 }
+
 .form-control {
   width: 80%;
   margin-left: 10%;
@@ -30,4 +32,12 @@ img.billboard {
 .search-submit {
   margin-top: 10px;
 
+}
+.course {
+  color: black;
+  margin-top: 3%;
+  border-radius: 10px;
+}
+.course:hover{
+  background-color: #f2e7c9;
 }
