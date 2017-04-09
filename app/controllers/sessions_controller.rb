@@ -10,8 +10,7 @@ class SessionsController < ApplicationController
       redirect_to user
       flash[:success] = "Welcome back, #{user.name}!"
     else
-      flash.now[:danger] = 'Invalid email/password combination' # Displays flash messages on rendered pages
-      render 'new'
+      flash.now[:danger] = 'Invalid email/password combination'
     end
   end
 
