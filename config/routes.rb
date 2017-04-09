@@ -5,5 +5,8 @@ Rails.application.routes.draw do
 
   get '/search/:q', to: 'courses#search', as: 'search'
   get '/courses/:id', to: 'courses#show', as: 'course'
+
+  get '/login', to: 'sessions#new'
+  get '/logout', to: 'sessions#destroy'
   
 end
