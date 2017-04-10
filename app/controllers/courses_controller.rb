@@ -3,6 +3,10 @@ class CoursesController < ApplicationController
     query = params[:q]
     if query
       @courses = Course.search(query)
+      if @courses.empty?
+        flash[:error]  = "Couldn't Find Any Courses :("
+        redirect_to search_rand_path
+      end
     else
       @courses = Course.limit(10).order("RANDOM()")
     end
