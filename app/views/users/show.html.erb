@@ -1,6 +1,19 @@
 <div class="user col-xs-4 col-sm-4 col-md-4 col-lg-4">
-  <%= image_tag current_user.image, class: "profile-img"%>
-  <h4><%= current_user.name%></h4>
+  <div>
+    <%= image_tag current_user.image, class: "profile-img"%>
+    <h4><%= current_user.name%></h4>
+  </div>
+  <div class="interests">
+    <h3 class="text-center">My Interests</h3>
+    <% current_user.courses.each do |course| %>
+      <%= link_to course_path(course) do %>
+        <div class="user-course">
+          <%= image_tag(course.image)%>
+          <h5><%= course.title%></h5>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 <div class="recomendations col-xs-8 col-sm-8 col-md-8 col-lg-8">
   
