@@ -16,7 +16,7 @@ class CoursesController < ApplicationController
     @course = Course.find_by_id(params[:id])
     unless @course
       flash[:error] = "Couldn't find that Course!"
-      redirect_to(current_user)
+      redirect_to search_rand_path
     end
     @course
   end
