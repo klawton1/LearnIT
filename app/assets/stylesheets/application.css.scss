@@ -15,29 +15,51 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-.header {
-
+body {
+  background-color: #efcca2
 }
-
+.header {
+  height: 60px;
+  background-color: #94383b;
+}
+.dropdown button {
+  background-color: #94383b;
+  border: 2px solid white;
+  height: 40px;
+  width: 40px;
+  border-radius: 20%;
+  float: left;
+}
+.dropdown-menu {
+  top: 40px;
+}
+.banner:hover {
+  filter: saturate(200%)
+}
+.form-control.search-input {
+  display: inline;
+  width: 40%;
+}
 .course-img {
   max-height: 200px;
   width: 100%;
 }
-
 .form-control {
   width: 80%;
   margin-left: 10%;
-}
-.search-submit {
-  margin-top: 10px;
-
 }
 .course {
   color: black;
   margin-top: 3%;
   border-radius: 10px;
 }
-.course:hover{
+.course:hover {
   background-color: #f2e7c9;
 }
+.session-field {
+  margin-left: 0px; 
+}
+.signup {
+  border-right: 1px solid black;
+}
+

@@ -1,0 +1,8 @@
+<h2 class="text-center">Login</h2>
+<%= form_for :user, url: signin_path do |f| %>
+  <%= f.label :email, "Email:" %>
+  <%= f.text_field :email, class: "form-control session-field", required: true %>
+  <%= f.label :password, "Password:" %>
+  <%= f.text_field :password, class: "form-control session-field", required: true %>
+  <%= f.submit "Submit", class: "btn btn-default", style: "margin-top: 10px;" %>
+<% end %>

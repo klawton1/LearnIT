@@ -1,0 +1,12 @@
+<h2 class="text-center">Sign Up</h2>
+<%= form_for :user, url: users_path do |f| %>
+  <%= f.label :image, "Avatar Link:" %>
+  <%= f.text_field :image, class: "form-control session-field", value: "" %>
+  <%= f.label :name, "Name:" %>
+  <%= f.text_field :name, class: "form-control session-field", required: true %>
+  <%= f.label :email, "Email:" %>
+  <%= f.text_field :email, class: "form-control session-field", required: true %>
+  <%= f.label :password, "Password:" %>
+  <%= f.text_field :password, class: "form-control session-field", required: true %>
+  <%= f.submit "Submit", class: "btn btn-default", style: "margin-top: 10px;" %>
+<% end %>

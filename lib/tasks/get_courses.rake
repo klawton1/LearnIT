@@ -13,6 +13,7 @@ namespace :get_courses do
           c[:class_id] = course['id']
           c[:title] = course['name']
           c[:description] = course['description']
+          c[:short_desc] = course['description'][0..200] + "..."
           c[:image] = course['photoUrl']
           c[:course_url] = "https://www.coursera.org/learn/" + course['slug']
           if course["previewLink"]
@@ -34,6 +35,7 @@ namespace :get_courses do
           end
         end
       end
+    Course.reindex
     end
   end
   desc "Put udacity courses into database"
@@ -70,6 +72,6 @@ namespace :get_courses do
         found[0].update(c)
       end
     end
+    Course.reindex
   end
-
 end
