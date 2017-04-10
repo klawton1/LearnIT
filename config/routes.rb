@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/courses/:id', to: 'courses#show', as: 'course'
 
   get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create', as: 'signin'
   get '/logout', to: 'sessions#destroy'
   
 end
