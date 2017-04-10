@@ -1,7 +1,11 @@
 class CoursesController < ApplicationController
   def search
     query = params[:q]
-    @courses = Course.search(query)
+    if query
+      @courses = Course.search(query)
+    else
+      @courses = Course.limit(10).order("RANDOM()")
+    end
   end
 
   def show
