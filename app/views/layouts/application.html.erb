@@ -10,6 +10,22 @@
 
   <body>
     <header class="header"> 
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu clearfix" aria-labelledby="dropdownMenu1">
+            <% if current_user %>
+              <li class="text-center"><%= link_to "Profile", user_path(current_user) %></li>
+            <% else %>
+              <li class="text-center"><a href="/login">Login/Signup</a></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="search text-center">
+          <%= text_field(:q, "", class: "form-control search-input", placeholder: "find a class!")  %>
+          <div class="btn btn-default search-submit" style="display: inline;">Search</div>
+        </div>
     </header>
     <a href="/">
       <%= image_tag("banner2.png", class: "banner img-responsive")%>
