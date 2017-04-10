@@ -1,0 +1,13 @@
+<%= form_for @user do |f| %>
+  <%= f.label :image, "Avatar Link:" %>
+  <%= f.text_field :image, class: "form-control session-field" %>
+  <%= f.label :name, "Name:" %>
+  <%= f.text_field :name, class: "form-control session-field", required: true %>
+  <%= f.label :email, "Email:" %>
+  <%= f.text_field :email, class: "form-control session-field", required: true %>
+  <%= f.label :password, "Password:" %>
+  <%= f.password_field :password, class: "password form-control session-field"%>
+  <%= f.label :password_confirmation, "ConfirmPassword:" %>
+  <%= f.password_field :password_confirmation, class: "password-confirm form-control session-field"%>
+  <%= f.submit "Submit", class: "btn btn-default", style: "margin-top: 10px;" %>
+<% end %>
