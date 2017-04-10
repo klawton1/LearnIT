@@ -17,6 +17,7 @@
           <ul class="dropdown-menu clearfix" aria-labelledby="dropdownMenu1">
             <% if current_user %>
               <li class="text-center"><%= link_to "Profile", user_path(current_user) %></li>
+              <li class="text-center"><%= link_to "Logout", logout_path %></li>
             <% else %>
               <li class="text-center"><a href="/login">Login/Signup</a></li>
             <% end %>
