@@ -5,6 +5,11 @@ class CoursesController < ApplicationController
   end
 
   def show
-    
+    @course = Course.find_by_id(params[:id])
+    unless @course
+      flash[:error] = "Couldn't find that Course!"
+      redirect_to(current_user)
+    end
+    @course
   end
 end

@@ -1,0 +1,15 @@
+<h2 class="text-center"><%= @course.title%></h2>
+<div class="course-page col-xs-5 col-sm-5 col-md-5 col-lg-5">
+  <%= image_tag @course.image, class: "img-responsive"%>
+</div>
+<div class="text-center col-xs-7 col-sm-7 col-md-7 col-lg-7">
+  <p><%= @course.description%></p>
+  <p>Has Certification:
+    <% if @course.has_cert %>
+      <span class="glyphicon glyphicon-ok"></span>
+    <% else %>
+      <span class="glyphicon glyphicon-remove"></span>
+    <% end %>
+  </p>
+  <p class=""><%= @course.provider%></p>
+</div>
