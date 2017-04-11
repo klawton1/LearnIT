@@ -3,7 +3,7 @@
   <%= image_tag @course.image, class: "img-responsive"%>
 </div>
 <div class="text-center col-xs-7 col-sm-7 col-md-7 col-lg-7">
-  <p><%= @course.description%></p>
+  <p><%= @course.description.html_safe%></p>
   <p>Has Certification:
     <% if @course.has_cert %>
       <span class="glyphicon glyphicon-ok"></span>
