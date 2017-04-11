@@ -63,15 +63,16 @@ body {
   border-right: 1px solid black;
 }
 .profile-img {
-  height: 70%;
-  width: 70%;
+  height: 50%;
+  width: 50%;
 }
 .user-course img {
   height: 75%;
   width: 75%;
   border-radius: 20%;
 }
-.interests {
+.interests h3 {
+  text-decoration: underline;
 }
 .glyphicon-check {
   font-size: x-large;

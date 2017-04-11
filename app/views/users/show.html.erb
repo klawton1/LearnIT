@@ -4,7 +4,7 @@
     <h4><%= current_user.name%></h4>
   </div>
   <div class="interests">
-    <h3 class="text-center">My Interests</h3>
+    <h3>My Interests:</h3>
     <% current_user.courses.each do |course| %>
       <%= link_to course_path(course) do %>
         <div class="user-course">
