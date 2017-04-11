@@ -7,36 +7,40 @@ namespace :get_courses do
     certificates&limit=200&start=100"
     res = JSON.parse(res)
     res['elements'].each do |course|
+      tech = false
       course['domainTypes'].each do |d|
         if (d['domainId'] == 'computer-science' || d['domainId'] == 'data-science') && course['primaryLanguages'].include?("en")
-          c = {}
-          c[:class_id] = course['id']
-          c[:title] = course['name']
-          c[:description] = course['description']
-          c[:short_desc] = course['description'][0..200] + "..."
-          c[:image] = course['photoUrl']
-          c[:course_url] = "https://www.coursera.org/learn/" + course['slug']
-          if course["previewLink"]
-            c[:preview_url] = course["previewLink"]
-          end
-          c[:duration] = course['workload']
-          c[:provider] = 0
-          if course['certificates'].empty?
-            c[:has_cert] = false
-          else
-            c[:has_cert] = true
-          end
-
-          found = Course.where(class_id: c[:class_id])
-          if found.empty?
-            Course.create(c)
-          else
-            found[0].update(c)
-          end
+          tech = true
         end
       end
-    Course.reindex
+      if tech
+        c = {}
+        c[:class_id] = course['id']
+        c[:title] = course['name']
+        c[:description] = course['description']
+        c[:short_desc] = course['description'][0..200] + "..."
+        c[:image] = course['photoUrl']
+        c[:course_url] = "https://www.coursera.org/learn/" + course['slug']
+        if course["previewLink"]
+          c[:preview_url] = course["previewLink"]
+        end
+        c[:duration] = course['workload']
+        c[:provider] = 0
+        if course['certificates'].empty?
+          c[:has_cert] = false
+        else
+          c[:has_cert] = true
+        end
+
+        found = Course.where(class_id: c[:class_id])
+        if found.empty?
+          Course.create(c)
+        else
+          found[0].update(c)
+        end
+      end
     end
+    Course.reindex
   end
   desc "Put udacity courses into database"
   task udacity: :environment do
