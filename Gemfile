@@ -13,6 +13,8 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
+# dotenv variables
+gem 'dotenv-rails', groups: [:development, :test]
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 # Use Bootstrap
