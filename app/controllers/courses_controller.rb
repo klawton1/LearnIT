@@ -13,7 +13,7 @@ class CoursesController < ApplicationController
   end
 
   def show
-    @course = Course.find_by_id(params[:id])
+    @course = Course.friendly.find_by_friendly_id(params[:id])
     unless @course
       flash[:error] = "Couldn't find that Course!"
       redirect_to search_rand_path
