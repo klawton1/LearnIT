@@ -16,20 +16,20 @@
           <span class="glyphicon glyphicon-check"></span>
         <% end %>
      </p>
-      <p class="text-right col-xs-6 col-sm-6 col-md-6 col-lg-6"><%= @course.provider%></p>
+      <h4 class="text-right col-xs-6 col-sm-6 col-md-6 col-lg-6">Sign Up at: <%= link_to @course.provider, @course.course_url%></h4>
     </div>
   </div>
 </div>
 <hr style="border-top: 2px solid white;">
 <h2 class="text-center">Related Courses</h2>
-<div class="recommends">
+<div class="recommends text-center">
   <div class="row">
     <% if @recs[0..2] %>
       <% @recs[0..2].each do |rec| %>
         <%= link_to course_path(rec) do %>
           <div class="user-course col-xs-6 col-sm-6 col-md-4 col-lg-4">
             <%= image_tag(rec.image, class: "img-responsive") %>
-            <h5><%= rec.title%></h5>
+            <h4><%= rec.title%></h4>
           </div>
         <% end %>
       <% end %>
@@ -41,7 +41,7 @@
         <%= link_to course_path(rec) do %>
           <div class="user-course col-xs-6 col-sm-6 col-md-4 col-lg-4">
             <%= image_tag(rec.image, class: "img-responsive") %>
-            <h5><%= rec.title%></h5>
+            <h4><%= rec.title%></h4>
           </div>
         <% end %>
       <% end %>
