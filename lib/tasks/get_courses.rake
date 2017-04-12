@@ -1,3 +1,4 @@
+require 'dotenv/load'
 require 'rest-client'
 require 'json'
 namespace :get_courses do
