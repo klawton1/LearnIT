@@ -13,8 +13,6 @@ gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
-# dotenv variables
-gem 'dotenv-rails'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 # Use Bootstrap
@@ -50,6 +48,8 @@ gem 'rest-client'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  # dotenv variables
+  gem 'dotenv-rails'
 end
 
 group :development do
