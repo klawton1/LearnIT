@@ -1,5 +1,5 @@
 require 'rest-client'
-require 'JSON'
+require 'json'
 require 'dotenv/tasks'
 namespace :get_courses do
   desc "Put coursera courses into database"
