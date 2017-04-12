@@ -17,15 +17,17 @@
   </div>
 </div>
 <div class="recomendations col-xs-8 col-sm-8 col-md-8 col-lg-8">
-  <h2 class="text-center">Related Courses</h2>
-  <div class="recommends">
-    <% @recs.each do |rec| %>
-      <%= link_to course_path(rec) do %>
-        <div class="user-course col-xs-10 col-sm-10 col-md-6 col-lg-6">
-          <%= image_tag(rec.image, class: "img-responsive") %>
-          <h5><%= rec.title%></h5>
-        </div>
+  <% if @recs %>
+    <h2 class="text-center">Recommended Courses</h2>
+    <div class="recommends">
+      <% @recs.each do |rec| %>
+        <%= link_to course_path(rec) do %>
+          <div class="user-course col-xs-10 col-sm-10 col-md-6 col-lg-6">
+            <%= image_tag(rec.image, class: "img-responsive") %>
+            <h5><%= rec.title%></h5>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>
