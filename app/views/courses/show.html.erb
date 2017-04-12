@@ -1,16 +1,34 @@
 <h2 class="text-center"><%= @course.title%></h2>
-<div class="course-page col-xs-5 col-sm-5 col-md-5 col-lg-5">
-  <%= image_tag @course.image, class: "img-responsive"%>
+<div class="row">
+  <div class="course-page col-xs-5 col-sm-5 col-md-5 col-lg-5">
+    <%= image_tag @course.image, class: "img-responsive"%>
+  </div>
+  <div class=" col-xs-7 col-sm-7 col-md-7 col-lg-7">
+    <p><%= @course.description.html_safe%></p>
+    <% if @course.has_cert %>
+      <p class="text-center">Certificate upon completion:<span class="glyphicon glyphicon-ok"></span></p>
+    <% elsif @course.has_cert == false %>
+      <p class="text-center">Certificate upon completion:<span class="glyphicon glyphicon-remove"></span></p>
+    <% end %>
+    <div>
+      <p class="text-left col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        Add to Interests: <%= link_to interests_path(id: @course.id), method: :post, controller: :users do %>
+          <span class="glyphicon glyphicon-check"></span>
+        <% end %>
+     </p>
+      <p class="text-right col-xs-6 col-sm-6 col-md-6 col-lg-6"><%= @course.provider%></p>
+    </div>
+  </div>
 </div>
-<div class="text-center col-xs-7 col-sm-7 col-md-7 col-lg-7">
-  <p><%= @course.description.html_safe%></p>
-  <% if @course.has_cert %>
-    <p>Certificate upon completion:<span class="glyphicon glyphicon-ok"></span></p>
-  <% elsif @course.has_cert == false %>
-    <p>Certificate upon completion:<span class="glyphicon glyphicon-remove"></span></p>
+<hr style="border-top: 2px solid white;">
+<h2 class="text-center">Related Courses</h2>
+<div class="recommends">
+  <% @recs.each do |rec| %>
+    <%= link_to course_path(rec) do %>
+      <div class="user-course col-xs-6 col-sm-6 col-md-4 col-lg-4">
+        <%= image_tag(rec.image, class: "img-responsive") %>
+        <h5><%= rec.title%></h5>
+      </div>
+    <% end %>
   <% end %>
-  <div>
-    <p class="text-left col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="glyphicon glyphicon-check"></span></p>
-    <p class="text-right col-xs-6 col-sm-6 col-md-6 col-lg-6"><%= @course.provider%></p>
-</div>
 </div>

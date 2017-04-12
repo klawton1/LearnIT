@@ -70,8 +70,9 @@ body {
   width: 50%;
 }
 .user-course img {
-  height: 75%;
-  width: 75%;
+  height: 100%;
+  width: 100%;
+  max-width: 475px;
   border-radius: 20%;
 }
 .interests h3 {
@@ -81,4 +82,7 @@ body {
   font-size: x-large;
 }
 
+.recomendations {
+  border-left: 2px solid white;
+}
 

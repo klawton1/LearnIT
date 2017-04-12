@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   root to: 'users#home'
   resources :users, only: [:create, :show, :edit, :update]
+  post '/interests', to: 'users#add_course', as: 'interests'
 
   get '/search', to: 'courses#search', as: 'search_rand'
   get '/search/:q', to: 'courses#search', as: 'search'

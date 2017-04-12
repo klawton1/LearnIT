@@ -19,5 +19,6 @@ class CoursesController < ApplicationController
       redirect_to search_rand_path
     end
     @course
+    @recs = @course.similar(fields: [:title, :short_desc], limit: 6)
   end
 end

@@ -9,8 +9,8 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      login(user);
-      flash[:success] = "Welcome to LearnIT"
+      log_in(user);
+      flash[:success] = "Welcome to LearnIT!"
       redirect_to user_path(user)
     else
       flash[:error] = "Not Good"
@@ -31,7 +31,26 @@ class UsersController < ApplicationController
   end
 
   def show
-    
+    i = rand(current_user.courses.length)
+    @recs = current_user.courses[i].similar(fields: [:title, :short_desc], limit: 6)
+  end
+
+  def add_course
+    unless logged_in?
+      flash[:error] = "Must sign up first"
+      redirect_to login_path
+    end
+    course = Course.find_by_id(params[:id])
+    if current_user.courses.include?(course)
+      flash[:error] = "Already a interest of yours"
+      redirect_to user_path(current_user)
+    elsif course 
+      current_user.courses << course
+      redirect_to user_path(current_user)
+    else
+      flash[:error] = "Couldn't find that course"
+      redirect_to search_rand_path
+    end
   end
 
   private

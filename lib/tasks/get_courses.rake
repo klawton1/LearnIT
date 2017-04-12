@@ -96,7 +96,7 @@ namespace :get_courses do
           c[:class_id] = course['id']
           c[:description] = course['description']
           c[:short_desc] = course['headline']
-          c[:image] = course['image_200_H']
+          c[:image] = course['image_480x270']
           c[:course_url] = "https://www.udemy.com" + course['url']
           c[:duration] = course['content_info']
           c[:provider] = 3
