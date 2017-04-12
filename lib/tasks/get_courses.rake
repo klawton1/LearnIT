@@ -1,4 +1,3 @@
-require 'rubygems'
 require 'rest-client'
 require 'JSON'
 require 'dotenv/tasks'
