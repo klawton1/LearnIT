@@ -17,12 +17,11 @@
 //= require bootstrap-sprockets
 
 $(document).on('turbolinks:load', function(){
-  $('.search-submit').on('click', function(){
-    var query = $('div.search input').val()
+  $('#search').on('submit', function(e){
+    e.preventDefault();
+    var query = $('div.search input').val();
     if (query) {
-      window.location.replace(`/search/${query}`)
-    }else{
-      console.log('no input')
+      window.location.replace(`/search/${query}`);
     }
   })
 })

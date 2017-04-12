@@ -24,8 +24,10 @@
           </ul>
         </div>
         <div class="search text-center">
-          <%= text_field(:q, "", class: "form-control search-input", placeholder: "find a class!")  %>
-          <div class="btn btn-default search-submit" style="display: inline;">Search</div>
+          <form id="search">
+            <input type="string" name="q" class="form-control search-input" placeholder="find a class!">
+            <input type="submit" value="Submit" class="btn btn-default search-submit">
+          </form>
         </div>
     </header>
     <a href="/search">
