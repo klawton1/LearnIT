@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :current_user?,     only: [:update, :edit, :show, :add_course]
   before_action :get_user,          only: [:update, :edit, :show]
   before_action :is_current_user,   only: [:update, :edit, :show]
   before_action :validate_password, only: [:update]
@@ -36,21 +37,16 @@ class UsersController < ApplicationController
   end
 
   def add_course
-    unless logged_in?
-      flash[:error] = "Sign up to add a course"
-      redirect_to login_path
+    course = Course.find_by_id(params[:id])
+    if current_user.courses.include?(course)
+      flash[:error] = "Already a interest of yours"
+      redirect_to user_path(current_user)
+    elsif course
+      current_user.courses << course
+      redirect_to user_path(current_user)
     else
-      course = Course.find_by_id(params[:id])
-      if current_user.courses.include?(course)
-        flash[:error] = "Already a interest of yours"
-        redirect_to user_path(current_user)
-      elsif course
-        current_user.courses << course
-        redirect_to user_path(current_user)
-      else
-        flash[:error] = "Couldn't find that course"
-        redirect_to search_rand_path
-      end
+      flash[:error] = "Couldn't find that course"
+      redirect_to search_rand_path
     end
   end
 

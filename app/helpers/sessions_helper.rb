@@ -4,9 +4,11 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
-  #Checks if user is the logged in user
-  def current_user?(user)
-    user == current_user
+  def current_user?
+    unless current_user
+      flash[:error] = "Must be logged in to do that"
+      redirect_to login_path
+    end
   end
 
   #Confirms user as signed in

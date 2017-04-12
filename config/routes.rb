@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create', as: 'signin'
   get '/logout', to: 'sessions#destroy'
   
+  match "*path", to: 'application#page_not_found', via: :all
 end
