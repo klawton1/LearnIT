@@ -6,8 +6,7 @@ namespace :get_courses do
   task coursera: :environment do
     starts = [0, 1000]
     starts.each do |start|
-      res = RestClient.get "https://api.coursera.org/api/courses.v1?q=search&fields=id,name,photoUrl,s12nIds,description,workload,domainTypes,previewLink,primaryLanguages,specializations,
-      certificates&limit=1000&start=#{start}"
+      res = RestClient.get "https://api.coursera.org/api/courses.v1?q=search&fields=id,name,photoUrl,s12nIds,description,workload,domainTypes,previewLink,primaryLanguages,specializations,certificates&limit=1000&start=#{start}"
       res = JSON.parse(res)
       res['elements'].each do |course|
         tech = false
@@ -18,6 +17,7 @@ namespace :get_courses do
         end
         if tech
           c = {}
+          c[:category] = course['slug']
           c[:class_id] = course['id']
           c[:title] = course['name']
           c[:description] = course['description']
@@ -52,6 +52,7 @@ namespace :get_courses do
     res = JSON.parse(res)
     res['courses'].each do |course|
       c = {}
+      c[:category] = course['slug'].split("--")[0]
       c[:title] = course['title']
       c[:class_id] = course['key']
       c[:description] = course['expected_learning']
@@ -90,6 +91,7 @@ namespace :get_courses do
       res['results'].each do |course|
         if course['primary_category']['title'] == "Development" || course['primary_category']['title'] == "IT & Software"
           c = {}
+          c[:category] = course['published_title']
           c[:title] = course['title']
           c[:class_id] = course['id']
           c[:description] = course['description']
@@ -122,6 +124,7 @@ namespace :get_courses do
     courses = JSON.parse(courses)
     courses['results'].each do |course|
       c = {}
+      c[:category] = course['title'][0..30]
       c[:title] = course['title']
       c[:class_id] = course['key']
       c[:description] = course['full_description']
@@ -144,6 +147,7 @@ namespace :get_courses do
       courses = JSON.parse(courses)
       courses['results'].each do |course|
         c = {}
+        c[:category] = course['title'][0..30]
         c[:title] = course['title']
         c[:class_id] = course['key']
         c[:description] = course['full_description']
