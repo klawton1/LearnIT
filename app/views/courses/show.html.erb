@@ -5,9 +5,9 @@
 <div class="text-center col-xs-7 col-sm-7 col-md-7 col-lg-7">
   <p><%= @course.description.html_safe%></p>
   <% if @course.has_cert %>
-    <p>Has Certification:<span class="glyphicon glyphicon-ok"></span></p>
+    <p>Certificate upon completion:<span class="glyphicon glyphicon-ok"></span></p>
   <% elsif @course.has_cert == false %>
-    <p>Has Certification:<span class="glyphicon glyphicon-remove"></span></p>
+    <p>Certificate upon completion:<span class="glyphicon glyphicon-remove"></span></p>
   <% end %>
   <div>
     <p class="text-left col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="glyphicon glyphicon-check"></span></p>
