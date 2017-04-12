@@ -4,13 +4,11 @@
 </div>
 <div class="text-center col-xs-7 col-sm-7 col-md-7 col-lg-7">
   <p><%= @course.description.html_safe%></p>
-  <p>Has Certification:
-    <% if @course.has_cert %>
-      <span class="glyphicon glyphicon-ok"></span>
-    <% else %>
-      <span class="glyphicon glyphicon-remove"></span>
-    <% end %>
-  </p>
+  <% if @course.has_cert %>
+    <p>Has Certification:<span class="glyphicon glyphicon-ok"></span></p>
+  <% elsif @course.has_cert == false %>
+    <p>Has Certification:<span class="glyphicon glyphicon-remove"></span></p>
+  <% end %>
   <p class="text-left col-xs-6 col-sm-6 col-md-6 col-lg-6 
 "><span class="glyphicon glyphicon-check"></span></p><p class="text-right col-xs-6 col-sm-6 col-md-6 col-lg-6"><%= @course.provider%></p>
 </div>
