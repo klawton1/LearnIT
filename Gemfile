@@ -14,7 +14,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 # dotenv variables
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails'
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 # Use Bootstrap
