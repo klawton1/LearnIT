@@ -23,12 +23,24 @@
 <hr style="border-top: 2px solid white;">
 <h2 class="text-center">Related Courses</h2>
 <div class="recommends">
-  <% @recs.each do |rec| %>
-    <%= link_to course_path(rec) do %>
-      <div class="user-course col-xs-6 col-sm-6 col-md-4 col-lg-4">
-        <%= image_tag(rec.image, class: "img-responsive") %>
-        <h5><%= rec.title%></h5>
-      </div>
+  <div class="row">
+    <% @recs[0..2].each do |rec| %>
+      <%= link_to course_path(rec) do %>
+        <div class="user-course col-xs-6 col-sm-6 col-md-4 col-lg-4">
+          <%= image_tag(rec.image, class: "img-responsive") %>
+          <h5><%= rec.title%></h5>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+  <div class="row">
+    <% @recs[3..5].each do |rec| %>
+      <%= link_to course_path(rec) do %>
+        <div class="user-course col-xs-6 col-sm-6 col-md-4 col-lg-4">
+          <%= image_tag(rec.image, class: "img-responsive") %>
+          <h5><%= rec.title%></h5>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

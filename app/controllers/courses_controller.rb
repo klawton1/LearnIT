@@ -2,7 +2,7 @@ class CoursesController < ApplicationController
   def search
     query = params[:q]
     if query
-      @courses = Course.search(query)
+      @courses = Course.search(query, limit: 25)
       if @courses.empty?
         flash[:error]  = "Couldn't Find Any Courses :("
         redirect_to search_rand_path

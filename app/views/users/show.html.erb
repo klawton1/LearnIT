@@ -1,7 +1,8 @@
 <div class="user col-xs-4 col-sm-4 col-md-4 col-lg-4">
   <div>
+    <h4><%= current_user.name%></h4>
+    <h5><%= link_to "Edit Profile", edit_user_path(current_user), class: "text-right" %></h5>
     <%= image_tag current_user.image, class: "profile-img"%>
-    <h4><%= current_user.name%> <br><%= link_to "Edit Profile", edit_user_path(current_user), class: "text-right" %></h4>
   </div>
   <div class="interests">
     <h3>My Interests:</h3>
