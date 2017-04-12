@@ -110,4 +110,59 @@ namespace :get_courses do
     end
     Course.reindex
   end
+  desc "Put edX courses into database"
+  task edx: :environment do
+    res = RestClient.post 'https://api.edx.org/oauth2/v1/access_token', {grant_type: 'client_credentials', token_type: 'jwt', client_id: ENV['EDX_ID'], client_secret: ENV['EDX_SECRET']}
+    res = JSON.parse(res)
+    token = res['access_token']
+    catalogs = RestClient.get "https://api.edx.org/catalog/v1/catalogs/", {:Authorization => "JWT #{token}"}
+    catalogs = JSON.parse(catalogs)
+    id = catalogs['results'][0]['id']
+    courses = RestClient.get "https://api.edx.org/catalog/v1/catalogs/#{id}/courses", {:Authorization => "JWT #{token}"}
+    courses = JSON.parse(courses)
+    courses['results'].each do |course|
+      c = {}
+      c[:title] = course['title']
+      c[:class_id] = course['key']
+      c[:description] = course['full_description']
+      c[:short_desc] = course['short_description']
+      c[:image] = course['image']['src']
+      c[:course_url] = "https://www.edx.org/course?search_query=" + c[:title]
+      c[:provider] = 2
+      if course['video']
+        c[:preview_url] = course['video']['src']
+      end
+      found = Course.where(class_id: c[:class_id])
+      if found.empty?
+        Course.create(c)
+      else
+        found[0].update(c)
+      end
+    end
+    while courses['next'] do
+      courses = RestClient.get courses['next'], {:Authorization => "JWT #{token}"}
+      courses = JSON.parse(courses)
+      courses['results'].each do |course|
+        c = {}
+        c[:title] = course['title']
+        c[:class_id] = course['key']
+        c[:description] = course['full_description']
+        c[:short_desc] = course['short_description']
+        if course['image']
+          c[:image] = course['image']['src']
+        end
+        c[:course_url] = "https://www.edx.org/course?search_query=" + c[:title]
+        c[:provider] = 2
+        if course['video']
+          c[:preview_url] = course['video']['src']
+        end
+        found = Course.where(class_id: c[:class_id])
+        if found.empty?
+          Course.create(c)
+        else
+          found[0].update(c)
+        end
+      end
+    end
+  end
 end
