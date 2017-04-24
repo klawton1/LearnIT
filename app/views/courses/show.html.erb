@@ -22,29 +22,39 @@
 </div>
 <hr style="border-top: 2px solid white;">
 <h2 class="text-center">Related Courses</h2>
-<div class="recommends text-center">
-  <div class="row">
-    <% if @recs[0..2] %>
-      <% @recs[0..2].each do |rec| %>
-        <%= link_to course_path(rec) do %>
-          <div class="user-course col-xs-6 col-sm-6 col-md-4 col-lg-4">
-            <%= image_tag(rec.image, class: "img-responsive") %>
-            <h4><%= rec.title%></h4>
-          </div>
-        <% end %>
+<div id="course-carousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <% @recs.length.times do |i| %>
+      <li data-target="#course-carousel" data-slide-to="<%= i %>"></li>
+    <% end %>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <% @recs.each do |rec| %>
+      <% if rec == @recs[0]%>
+        <div class="item active">
+      <% else %>
+        <div class="item">
       <% end %>
+        <%= link_to course_path(rec) do %>
+          <%= image_tag rec.image, class: "carousel-img"%>
+        <% end %>
+        <div class="carousel-caption">
+          <h3><%= rec.title %></h3>
+        </div>
+      </div>
     <% end %>
   </div>
-  <div class="row">
-    <% if @recs[3..5] %>
-      <% @recs[3..5].each do |rec| %>
-        <%= link_to course_path(rec) do %>
-          <div class="user-course col-xs-6 col-sm-6 col-md-4 col-lg-4">
-            <%= image_tag(rec.image, class: "img-responsive") %>
-            <h4><%= rec.title%></h4>
-          </div>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#course-carousel" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#course-carousel" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
 </div>
