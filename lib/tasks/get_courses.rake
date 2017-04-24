@@ -2,6 +2,10 @@ require 'dotenv/load'
 require 'rest-client'
 require 'json'
 namespace :get_courses do
+  desc "Get all Courses"
+  task all: [:coursera, :udacity, :udemy, :edx] do
+
+  end
   desc "Put coursera courses into database"
   task coursera: :environment do
     starts = [0, 1000]
@@ -35,11 +39,11 @@ namespace :get_courses do
             c[:has_cert] = true
           end
 
-          found = Course.where(class_id: c[:class_id])
-          if found.empty?
+          found = Course.find_by(class_id: c[:class_id])
+          if !found
             Course.create(c)
           else
-            found[0].update(c)
+            found.update(c)
           end
         end
       end
@@ -74,11 +78,11 @@ namespace :get_courses do
         c[:has_cert] = true
       end
 
-      found = Course.where(class_id: c[:class_id])
-      if found.empty?
+      found = Course.find_by(class_id: c[:class_id])
+      if !found
         Course.create(c)
       else
-        found[0].update(c)
+        found.update(c)
       end
     end
     Course.reindex
@@ -101,11 +105,11 @@ namespace :get_courses do
           c[:duration] = course['content_info']
           c[:provider] = 3
           c[:has_cert] = course['has_certificate']
-          found = Course.where(class_id: c[:class_id])
-          if found.empty?
+          found = Course.find_by(class_id: c[:class_id])
+          if !found
             Course.create(c)
           else
-            found[0].update(c)
+            found.update(c)
           end
         end
       end
@@ -122,51 +126,36 @@ namespace :get_courses do
     id = catalogs['results'][0]['id']
     courses = RestClient.get "https://api.edx.org/catalog/v1/catalogs/#{id}/courses", {:Authorization => "JWT #{token}"}
     courses = JSON.parse(courses)
-    courses['results'].each do |course|
-      c = {}
-      c[:category] = course['title'][0..30]
-      c[:title] = course['title']
-      c[:class_id] = course['key']
-      c[:description] = course['full_description']
-      c[:short_desc] = course['short_description']
-      c[:image] = course['image']['src']
-      c[:course_url] = "https://www.edx.org/course?search_query=" + c[:title]
-      c[:provider] = 2
-      if course['video']
-        c[:preview_url] = course['video']['src']
-      end
-      found = Course.where(class_id: c[:class_id])
-      if found.empty?
-        Course.create(c)
-      else
-        found[0].update(c)
-      end
-    end
+    create_courses(courses)
     while courses['next'] do
       courses = RestClient.get courses['next'], {:Authorization => "JWT #{token}"}
       courses = JSON.parse(courses)
-      courses['results'].each do |course|
-        c = {}
-        c[:category] = course['title'][0..30]
-        c[:title] = course['title']
-        c[:class_id] = course['key']
-        c[:description] = course['full_description']
-        c[:short_desc] = course['short_description']
-        if course['image']
-          c[:image] = course['image']['src']
-        end
-        c[:course_url] = "https://www.edx.org/course?search_query=" + c[:title]
-        c[:provider] = 2
-        if course['video']
-          c[:preview_url] = course['video']['src']
-        end
-        found = Course.where(class_id: c[:class_id])
-        if found.empty?
-          Course.create(c)
-        else
-          found[0].update(c)
-        end
-      end
+      create_courses(courses)
+    end
+  end
+end
+
+def create_courses courses
+  courses['results'].each do |course|
+    c = {}
+    c[:category] = course['title'][0..30]
+    c[:title] = course['title']
+    c[:class_id] = course['key']
+    c[:description] = course['full_description']
+    c[:short_desc] = course['short_description']
+    if course['image']
+      c[:image] = course['image']['src']
+    end
+    c[:course_url] = "https://www.edx.org/course?search_query=" + c[:title]
+    c[:provider] = 2
+    if course['video']
+      c[:preview_url] = course['video']['src']
+    end
+    found = Course.find_by(class_id: c[:class_id])
+    if !found
+      Course.create(c)
+    else
+      found.update(c)
     end
   end
 end
