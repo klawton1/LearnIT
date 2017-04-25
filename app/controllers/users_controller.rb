@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   def show
     i = rand(current_user.courses.length)
     unless current_user.courses.empty?
-      @recs = current_user.courses[i].similar(fields: [:title, :short_desc], limit: 6)
+      @recs = current_user.courses[i].similar(fields: [:title, :short_desc, :category, :header], limit: 6)
     end
   end
 
