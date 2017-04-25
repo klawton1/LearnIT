@@ -2,10 +2,11 @@ require 'dotenv/load'
 require 'rest-client'
 require 'json'
 namespace :get_courses do
+
   desc "Get all Courses"
   task all: [:coursera, :udacity, :udemy, :edx] do
-
   end
+
   desc "Put coursera courses into database"
   task coursera: :environment do
     starts = [0, 1000]
@@ -21,7 +22,11 @@ namespace :get_courses do
         end
         if tech
           c = {}
-          c[:category] = course['slug']
+          c[:category] = ""
+          course['domainTypes'].each do |d|
+            c[:category] = c[:category] + d['domainId'] + " " + d['subdomainId']
+          end
+          c[:header] = course['slug'].gsub('-', ' ')
           c[:class_id] = course['id']
           c[:title] = course['name']
           c[:description] = course['description']
@@ -38,7 +43,6 @@ namespace :get_courses do
           else
             c[:has_cert] = true
           end
-
           found = Course.find_by(class_id: c[:class_id])
           if !found
             Course.create(c)
@@ -50,13 +54,16 @@ namespace :get_courses do
     end
     Course.reindex
   end
+
   desc "Put udacity courses into database"
   task udacity: :environment do
     res = RestClient.get "https://www.udacity.com/public-api/v0/courses"
     res = JSON.parse(res)
     res['courses'].each do |course|
       c = {}
-      c[:category] = course['slug'].split("--")[0]
+      c[:level] = course['level']
+      c[:category] = course['subtitle']
+      c[:header] = course['slug'].split("--")[0].gsub('-', ' ')
       c[:title] = course['title']
       c[:class_id] = course['key']
       c[:description] = course['expected_learning']
@@ -77,7 +84,6 @@ namespace :get_courses do
       else
         c[:has_cert] = true
       end
-
       found = Course.find_by(class_id: c[:class_id])
       if !found
         Course.create(c)
@@ -87,15 +93,18 @@ namespace :get_courses do
     end
     Course.reindex
   end
+
   desc "Put Udemy courses into database"
   task udemy: :environment do
     (1..10).each do |i|
       res = RestClient.get "https://www.udemy.com/api-2.0/courses/?fields[course]=@all&page=#{i}&page_size=100", {:Authorization => ENV["UDEMY_KEY"]}
       res = JSON.parse(res)
       res['results'].each do |course|
-        if course['primary_category']['title'] == "Development" || course['primary_category']['title'] == "IT & Software"
+        if (course['primary_category']['title'] == "Development" || course['primary_category']['title'] == "IT & Software") && course['is_published']
           c = {}
-          c[:category] = course['published_title']
+          c[:level] = course['instructional_level']
+          c[:category] = course['primary_category']['title'] + " " + course['primary_subcategory']['title']
+          c[:header] = course['published_title'].gsub('-', ' ')
           c[:title] = course['title']
           c[:class_id] = course['id']
           c[:description] = course['description']
@@ -103,7 +112,7 @@ namespace :get_courses do
           c[:image] = course['image_480x270']
           c[:course_url] = "https://www.udemy.com" + course['url']
           c[:duration] = course['content_info']
-          c[:provider] = 3
+          c[:provider] = 2
           c[:has_cert] = course['has_certificate']
           found = Course.find_by(class_id: c[:class_id])
           if !found
@@ -116,6 +125,7 @@ namespace :get_courses do
     end
     Course.reindex
   end
+
   desc "Put edX courses into database"
   task edx: :environment do
     res = RestClient.post 'https://api.edx.org/oauth2/v1/access_token', {grant_type: 'client_credentials', token_type: 'jwt', client_id: ENV['EDX_ID'], client_secret: ENV['EDX_SECRET']}
@@ -126,19 +136,21 @@ namespace :get_courses do
     id = catalogs['results'][0]['id']
     courses = RestClient.get "https://api.edx.org/catalog/v1/catalogs/#{id}/courses", {:Authorization => "JWT #{token}"}
     courses = JSON.parse(courses)
-    create_courses(courses)
+    edx_courses(courses)
     while courses['next'] do
       courses = RestClient.get courses['next'], {:Authorization => "JWT #{token}"}
       courses = JSON.parse(courses)
-      create_courses(courses)
+      edx_courses(courses)
     end
   end
 end
 
-def create_courses courses
+def edx_courses courses
   courses['results'].each do |course|
     c = {}
-    c[:category] = course['title'][0..30]
+    c[:level] = course['level_type']
+    c[:category] = course['subjects'].map{|s| s['name']}.join(" ")
+    c[:header] = course['title'][0..30]
     c[:title] = course['title']
     c[:class_id] = course['key']
     c[:description] = course['full_description']
@@ -147,7 +159,7 @@ def create_courses courses
       c[:image] = course['image']['src']
     end
     c[:course_url] = "https://www.edx.org/course?search_query=" + c[:title]
-    c[:provider] = 2
+    c[:provider] = 3
     if course['video']
       c[:preview_url] = course['video']['src']
     end
