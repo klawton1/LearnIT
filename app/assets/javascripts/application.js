@@ -19,7 +19,7 @@
 $(document).on('turbolinks:load', function(){
   setTimeout(function(){
     $('.right.carousel-control').click();
-  },1000)
+  },3000)
   $('#search').on('submit', function(e){
     e.preventDefault();
     var query = $('div.search input').val();
