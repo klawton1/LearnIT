@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412041829) do
+ActiveRecord::Schema.define(version: 20170425010702) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20170412041829) do
     t.string   "category"
     t.integer  "views",       default: 0
     t.string   "slug"
+    t.string   "header"
+    t.string   "level"
     t.index ["slug"], name: "index_courses_on_slug", unique: true, using: :btree
   end
 
