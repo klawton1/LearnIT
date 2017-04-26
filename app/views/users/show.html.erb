@@ -1,33 +1,25 @@
-<div class="user col-xs-4 col-sm-4 col-md-4 col-lg-4">
-  <div>
-    <h4><%= current_user.name%></h4>
-    <h5><%= link_to "Edit Profile", edit_user_path(current_user), class: "text-right" %></h5>
-    <%= image_tag current_user.image, class: "profile-img"%>
+<div class="users row">
+  <div class="user col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <div>
+      <%= image_tag current_user.image, class: "profile-img"%>
+      <h3 class="text-center"><span class="pull-left"><%= current_user.name%></span><span class="pull-right"><%= link_to "Edit Profile", edit_user_path(current_user), class: "btn btn-default edi" %></span></h3>
+    </div>
   </div>
-  <div class="interests">
-    <h3>My Interests:</h3>
-    <% current_user.courses.each do |course| %>
-      <%= link_to course_path(course) do %>
-        <div class="user-course text-center">
-          <%= image_tag(course.image)%>
-          <h5><%= course.title%></h5>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<div class="recomendations col-xs-8 col-sm-8 col-md-8 col-lg-8">
-  <% if @recs %>
-    <h2 class="text-center">Recommended Courses</h2>
-    <div class="recommends">
-      <% @recs.each do |rec| %>
-        <%= link_to course_path(rec) do %>
-          <div class="user-course col-xs-10 col-sm-10 col-md-6 col-lg-6">
-            <%= image_tag(rec.image, class: "img-responsive") %>
-            <h5><%= rec.title%></h5>
+  <div class="recommendations col-xs-8 col-sm-8 col-md-8 col-lg-8">
+    <div class="interests">
+      <h3 class="text-center">My Interests</h3>
+      <% current_user.courses.each do |course| %>
+        <div class="user-course col-md-6 text-center">
+          <%= link_to course_path(course) do %>
+            <%= image_tag(course.image)%>
+            <h4><%= course.title%></h4>
           </div>
         <% end %>
       <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
+<h2 class="text-center">Recommended Courses</h2>
+<% if @recs%>
+  <%= render 'courses/recommendations'%>
+<% end %>

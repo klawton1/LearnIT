@@ -27,4 +27,9 @@ $(document).on('turbolinks:load', function(){
       window.location.replace(`/search/${query}`);
     }
   });
+  if ($('.user').height() > $('.recommendations').height()) {
+    $('.user').css('border-right', '2px solid white');
+  }else {
+    $('.recommendations').css('border-left', '2px solid white');
+  }
 });
