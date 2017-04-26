@@ -16,7 +16,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 body {
-  background-color: #efcca2
+  background-color: #efcca2;
+  font-family: 'Oranienba', serif;
+  font-size: 18px;
+}
+h2, h3 {
+  font-family: 'Electrolize', sans-serif;
 }
 .header {
   height: 10%;
@@ -47,6 +52,7 @@ body {
 .course-img {
   max-height: 200px;
   width: 100%;
+
 }
 .form-control {
   width: 80%;
@@ -67,14 +73,14 @@ body {
   border-right: 1px solid black;
 }
 .profile-img {
-  height: 50%;
-  width: 50%;
+  width: 100%;
+  border-radius: 10px;
 }
 .user-course img {
-  height: 100%;
   width: 100%;
+  max-height: 150px;
   max-width: 255px;
-  border-radius: 20%;
+  border-radius: 20px;
 }
 .interests h3 {
   text-decoration: underline;
@@ -115,7 +121,5 @@ body {
 .carousel-control {
   border-radius: 10px;
 }
-.recomendations {
-  border-left: 2px solid white;
-}
+
 
