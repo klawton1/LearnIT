@@ -15,19 +15,34 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
 body {
   background-color: #efcca2;
   font-family: 'Oranienba', serif;
   font-size: 18px;
 }
+h1 {
+  font-size: 4vw;
+}
 h2, h3 {
   font-family: 'Electrolize', sans-serif;
 }
+
+.logos a {
+  margin: 0px;
+}
+.course-logo{
+  width: 19%;
+  margin-left: 3%;
+  margint-right: 3%;
+}
+
 .header {
   height: 10%;
   width: 100%;
   background-color: #94383b;
 }
+
 .dropdown button {
   background-color: #94383b;
   border: 2px solid white;
@@ -36,58 +51,72 @@ h2, h3 {
   border-radius: 20%;
   float: left;
 }
+
 .dropdown-menu {
   top: 40px;
 }
+
 .banner:hover {
   filter: saturate(200%)
 }
+
 .search {
   padding-top: 10px;
 }
+
 .form-control.search-input {
   display: inline;
   width: 40%;
 }
+
 .course-img {
   max-height: 200px;
   width: 100%;
-
 }
+
 .form-control {
   width: 80%;
   margin-left: 10%;
 }
+
 .course {
   color: black;
   margin-top: 3%;
   border-radius: 10px;
 }
+
 .course:hover {
   background-color: #f2e7c9;
 }
+
 .session-field {
   margin-left: 0px; 
 }
+
 .signup {
   border-right: 1px solid black;
 }
+
 .profile-img {
   width: 100%;
   border-radius: 10px;
 }
+
 .user-course img {
   width: 100%;
   max-height: 150px;
   max-width: 255px;
   border-radius: 20px;
 }
+
 .interests h3 {
   text-decoration: underline;
 }
+
 .glyphicon-check {
   font-size: x-large;
 }
+
 #course-carousel {
   max-width: 720px;
   position: relative;
@@ -96,10 +125,12 @@ h2, h3 {
   margin-bottom: 20px;
   height: 300px;
 }
+
 .carousel-inner {
   top: 50%;
   transform: translateY(-50%);
 }
+
 .carousel-img {
   opacity: 0.7;
   width: 70%;
@@ -108,18 +139,20 @@ h2, h3 {
   left: 50%;
   transform: translateX(-50%);
 }
+
 .carousel-img:hover {
   opacity: 1;
 }
+
 .carousel-caption h3 {
   margin-top: 0px;
   text-shadow: 0px 0px 10px black;
 }
+
 .carousel-caption {
   padding-top: 0px;
 }
+
 .carousel-control {
   border-radius: 10px;
 }
-
-

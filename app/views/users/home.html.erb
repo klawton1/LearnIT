@@ -1,0 +1,28 @@
+<h1 class="text-center">Find The Course You've Been Looking For</h1>
+<div class="spacer"></div>
+<hr>
+<h1 class="text-center"> Search through courses from these providers:</h1>
+<div class="text-center logos">
+  <a href="https://www.coursera.org"><img src="http://techfaster.com/wp-content/uploads/2014/03/Coursera-Logo.png" class="course-logo"></a>
+
+  <a href="https://www.edx.org" class="course-logo"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/EdX.svg/800px-EdX.svg.png" class="course-logo"></a>
+
+  <a href="https://www.udacity.com" class="course-logo"><img src="https://d125fmws0bore1.cloudfront.net/assets/udacity_share-46db4b8faf075a5af5a1070a7fa0ad3639783609ff45f447e4ea467fe3aa9d32.png" class="course-logo"></a>
+
+  <a href="https://www.udemy.com" class="course-logo"><img src="http://www.businessproductivity.com/wp-content/uploads/2011/10/udemy-logo-transparent.png" class="course-logo"></a>
+</div>
+<hr>
+
+<h1 class="text-center">Todays popular courses</h1>
+<% @popular.each do |course| %>
+  <div class="col-xs-12">
+    <div class="col-xs-12 col-md-6">
+      <%= image_tag course.image, class: "img-responsive"%>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <h3><%= course.title %> </h3>
+      <p><%= course.short_desc %> </p>
+    </div>
+  </div>
+<% end %>
+
