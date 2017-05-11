@@ -16,14 +16,16 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.spacer, .popular {
+  margin-top: 40px;
+}
+
 body {
   background-color: #efcca2;
   font-family: 'Oranienba', serif;
   font-size: 18px;
 }
-h1 {
-  font-size: 4vw;
-}
+
 h2, h3 {
   font-family: 'Electrolize', sans-serif;
 }
@@ -54,6 +56,10 @@ h2, h3 {
 
 .dropdown-menu {
   top: 40px;
+}
+
+.banner {
+  width: 100%;
 }
 
 .banner:hover {

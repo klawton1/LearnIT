@@ -22,12 +22,13 @@
             <% else %>
               <li class="text-center"><a href="/login">Login/Signup</a></li>
             <% end %>
+            <li class="text-center"><%= link_to "Home", root_path %></li>
           </ul>
         </div>
         <div class="search text-center">
           <form id="search">
             <input type="string" name="q" class="form-control search-input" placeholder="find a class!">
-            <input type="submit" value="Submit" class="btn btn-default search-submit">
+            <input type="submit" value="Search" class="btn btn-default search-submit">
           </form>
         </div>
     </header>
