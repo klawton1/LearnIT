@@ -36,18 +36,21 @@
       <%= image_tag("banner2.png", class: "banner img-responsive")%>
     </a>
     <% flash.each do |name, message| %>
-    <% if flash[:success] %>
-      <div class="flash text-center bg-success">
-        <%= message %>
-      </div>
-    <% else %>
-      <div class="flash text-center bg-danger">
-        <%= message %>
-      </div>
+      <% if flash[:success] %>
+        <div class="flash text-center bg-success">
+          <%= message %>
+        </div>
+      <% else %>
+        <div class="flash text-center bg-danger">
+          <%= message %>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
     <div class="container">
       <%= yield %>
+    </div>
+    <div class="footer text-center">
+      <p>Developed by: <a href="https://github.com/klawton1">Kody Lawton</a> - 2017</p>
     </div>
   </body>
 </html>
