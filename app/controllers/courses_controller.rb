@@ -18,7 +18,8 @@ class CoursesController < ApplicationController
       flash[:error] = "Couldn't find that Course!"
       redirect_to search_rand_path
     end
-    @course
+    @course.views += 1
+    @course.save
     @recs = @course.similar(fields: [:title, :short_desc, :category, :header], limit: 6)
   end
 end
