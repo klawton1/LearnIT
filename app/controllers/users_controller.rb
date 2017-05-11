@@ -4,14 +4,14 @@ class UsersController < ApplicationController
   before_action :is_current_user,   only: [:update, :edit, :show]
   before_action :validate_password, only: [:update]
   def home
-    @popular = Course.limit(5).where("views != 0").order(:views)
+    @popular = Course.limit(5).where("views != 0").order(views: :desc)
     if @popular.length < 5
       rands = Course.limit(5 - @popular.length).order("RANDOM()")
       @popular = @popular.to_a
       rands.to_a.each {|c| @popular.push(c)}
     end
     @popular
-    
+
   end
 
   def create

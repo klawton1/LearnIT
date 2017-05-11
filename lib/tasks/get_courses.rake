@@ -3,6 +3,11 @@ require 'rest-client'
 require 'json'
 namespace :get_courses do
 
+  desc "Set views to 0"
+  task reset_views: :environment do
+    Course.update_all("views = 0")
+  end
+
   desc "Get all Courses"
   task all: [:coursera, :udacity, :udemy, :edx] do
   end
